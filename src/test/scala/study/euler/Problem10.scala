@@ -26,18 +26,16 @@ class Problem10() {
     var sum = 0L
     var n = 2
     while (n < maxValue) {
-      if (isPrime(n)) {
-        sum += n
-      }
+      if (isPrime(n)) sum += n
       n += 1
     }
     sum
   }
 
-  private def isPrime(number: Long): Boolean = {
+  private def isPrime(maxValue: Long): Boolean = {
     var m = 2L
-    while (m <= number / m) {
-      if (number % m == 0) {
+    while (m <= maxValue / m) {
+      if (maxValue % m == 0) {
         return false
       }
       m += 1
