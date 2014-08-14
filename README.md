@@ -3,8 +3,8 @@ Euler Project
 
 This is a hobby project where I've decided to take on completing the problems on the 
 [Project Euler](https://projecteuler.net/) web site. Feel free to take a look at the
-problems that I've implemented here in Scala; however, you may want to try your hand at
-the problems yourself before looking at my solutions.
+solutions to the problems that I've implemented here in Scala; however, you may want 
+to try your hand at the problems yourself before looking at my solutions.
 
 ### Build Requirements
 
