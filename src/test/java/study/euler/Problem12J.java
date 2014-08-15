@@ -67,8 +67,9 @@ public class Problem12J {
             // extract the chunk
             final String chunk = DATA_GRID.substring(start, end <= DATA_GRID.length() ? end : DATA_GRID.length());
 
-            // if the chunk does not contain zeroes, proceed
-            if (!chunk.contains("0")) {
+            // if the chunk contain a zero, skip it
+            if (chunk.contains("0")) skipped++;
+            else {
                 // get the products
                 final char[] chars = chunk.toCharArray();
                 int product = 1;
@@ -79,8 +80,6 @@ public class Problem12J {
                     digits = chunk;
                     largest = product;
                 }
-            } else {
-                skipped++;
             }
         }
 
