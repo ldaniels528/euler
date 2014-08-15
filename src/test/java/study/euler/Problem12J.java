@@ -60,7 +60,7 @@ public class Problem12J {
         int largest = 0;
         int skipped = 0;
 
-        for (int start = 0; start < DATA_GRID.length(); start++) {
+        for (int start = 0; start < DATA_GRID.length() - 4; start++) {
             // determine the end of the chunk
             final int end = start + 5;
 
@@ -84,7 +84,7 @@ public class Problem12J {
             }
         }
 
-        logger.info(format("The largest product is %d from \"%s\" (skipped %d)", largest, digits, skipped));
+        logger.info(format("The largest product is %d from \"%s\" (%d skipped)", largest, digits, skipped));
     }
 
 }
