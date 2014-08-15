@@ -62,7 +62,7 @@ class Problem12 {
       // if the chunk contains a zero, skip it
       if (chunk.contains('0')) skipped += 1
       else {
-        val product = (chunk map (_ - '0')).foldLeft[Int](1)((n, product) => n * product)
+        val product = (chunk map (_ - '0')).foldLeft[Int](1)((product, n) => n * product)
         if (product > largest) {
           largest = product
           digits = chunk
