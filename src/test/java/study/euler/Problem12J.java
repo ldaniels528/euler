@@ -1,6 +1,10 @@
 package study.euler;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static java.lang.String.format;
 
 /**
  * Find the greatest product of five consecutive digits in the 1000-digit number.
@@ -27,10 +31,7 @@ import org.junit.Test;
  * 71636269561882670428252483600823257530420752963450
  */
 public class Problem12J {
-
-    @Test
-    public void solve() {
-        final String data =
+    private static final String DATA_GRID =
             "73167176531330624919225119674426574742355349194934" +
             "96983520312774506326239578318016984801869478851843" +
             "85861560789112949495459501737958331952853208805511" +
@@ -51,25 +52,28 @@ public class Problem12J {
             "84580156166097919133875499200524063689912560717606" +
             "05886116467109405077541002256983155200055935729725" +
             "71636269561882670428252483600823257530420752963450";
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Test
+    public void solve() {
         String digits = null;
         int largest = 0;
         int skipped = 0;
 
-        for (int start = 0; start < data.length(); start++) {
+        for (int start = 0; start < DATA_GRID.length(); start++) {
             // determine the end of the chunk
             final int end = start + 5;
 
             // extract the chunk
-            final String chunk = data.substring(start, end <= data.length() ? end : data.length());
+            final String chunk = DATA_GRID.substring(start, end <= DATA_GRID.length() ? end : DATA_GRID.length());
 
             // if the chunk does not contain zeroes, proceed
             if (!chunk.contains("0")) {
                 // get the products
                 final char[] chars = chunk.toCharArray();
                 int product = 1;
-                for (int n = 0; n < chars.length; n++) {
-                    product *= (chars[n] - '0');
+                for (final char ch : chars) {
+                    product *= (ch - '0');
                 }
                 if (product > largest) {
                     digits = chunk;
@@ -80,7 +84,7 @@ public class Problem12J {
             }
         }
 
-        System.out.printf("The largest product is %d from \"%s\" (skipped %d)\n", largest, digits, skipped);
+        logger.info(format("The largest product is %d from \"%s\" (skipped %d)", largest, digits, skipped));
     }
 
 }
