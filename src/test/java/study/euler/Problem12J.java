@@ -60,6 +60,7 @@ public class Problem12J {
         int largest = 0;
         int skipped = 0;
 
+        // iterate through the string until there are less than 5 character available
         for (int start = 0; start < DATA_GRID.length() - 4; start++) {
             // determine the end of the chunk
             final int end = start + 5;
@@ -71,11 +72,8 @@ public class Problem12J {
             if (chunk.contains("0")) skipped++;
             else {
                 // get the products
-                final char[] chars = chunk.toCharArray();
                 int product = 1;
-                for (final char ch : chars) {
-                    product *= (ch - '0');
-                }
+                for (final char ch : chunk.toCharArray()) product *= (ch - '0');
                 if (product > largest) {
                     digits = chunk;
                     largest = product;

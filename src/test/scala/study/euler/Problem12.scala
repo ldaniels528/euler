@@ -49,8 +49,7 @@ class Problem12 {
       |07198403850962455444362981230987879927244284909188
       |84580156166097919133875499200524063689912560717606
       |05886116467109405077541002256983155200055935729725
-      |71636269561882670428252483600823257530420752963450"""
-      .stripMargin.replaceAllLiterally("\n", "")
+      |71636269561882670428252483600823257530420752963450""".stripMargin.replaceAllLiterally("\n", "")
 
   @Test
   def solve() {
@@ -60,7 +59,6 @@ class Problem12 {
 
     // process the string as sequences of 5 characters
     dataGrid.sliding(5, 1) foreach { chunk =>
-
       // if the chunk contains a zero, skip it
       if (chunk.contains('0')) skipped += 1
       else {
