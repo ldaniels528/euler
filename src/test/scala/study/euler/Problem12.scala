@@ -53,20 +53,28 @@ class Problem12 {
       .stripMargin.replaceAllLiterally("\n", "")
 
   @Test
-  def solve {
+  def solve() {
     var largest: Int = 0
     var digits: Array[Char] = Array.empty
+    var skipped = 0
 
     dataGrid.sliding(5, 1) foreach { s =>
-      val chars = s.toCharArray
-      val product = (chars map (_ - '0')).foldLeft[Int](1)((n, product) => product * n)
-      if (product > largest) {
-        largest = product
-        digits = chars
+      val chunk = s.toCharArray
+
+      // if the chunk does not contain zeroes, proceed
+      if(!chunk.contains('0')) {
+        val product = (chunk map (_ - '0')).foldLeft[Int](1)((n, product) => n * product)
+        if (product > largest) {
+          largest = product
+          digits = chunk
+        }
+      }
+      else {
+        skipped += 1
       }
     }
 
-    logger.info( s"""The largest product is $largest from "${digits.mkString}"""")
+    logger.info( s"""The largest product is $largest from "${digits.mkString} ($skipped skipped)"""")
   }
 
 }
