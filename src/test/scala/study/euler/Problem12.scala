@@ -55,11 +55,11 @@ class Problem12 {
   @Test
   def solve() {
     var largest: Int = 0
-    var digits: Array[Char] = Array.empty
+    var digits: String = ""
     var skipped = 0
 
-    dataGrid.sliding(5, 1) foreach { s =>
-      val chunk = s.toCharArray
+    // process the string into sequences of 5 characters
+    dataGrid.sliding(5, 1) foreach { chunk =>
 
       // if the chunk does not contain zeroes, proceed
       if(!chunk.contains('0')) {
