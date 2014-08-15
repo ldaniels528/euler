@@ -58,19 +58,17 @@ class Problem12 {
     var digits: String = ""
     var skipped = 0
 
-    // process the string into sequences of 5 characters
+    // process the string as sequences of 5 characters
     dataGrid.sliding(5, 1) foreach { chunk =>
 
-      // if the chunk does not contain zeroes, proceed
-      if(!chunk.contains('0')) {
+      // if the chunk contains a zero, skip it
+      if (chunk.contains('0')) skipped += 1
+      else {
         val product = (chunk map (_ - '0')).foldLeft[Int](1)((n, product) => n * product)
         if (product > largest) {
           largest = product
           digits = chunk
         }
-      }
-      else {
-        skipped += 1
       }
     }
 
