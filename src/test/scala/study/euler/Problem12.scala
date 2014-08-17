@@ -26,6 +26,8 @@ import org.slf4j.LoggerFactory
  * 84580156166097919133875499200524063689912560717606
  * 05886116467109405077541002256983155200055935729725
  * 71636269561882670428252483600823257530420752963450
+ *
+ * Answer: The largest product is 40824 at position 364
  */
 class Problem12 {
   private val logger = LoggerFactory.getLogger(getClass)
@@ -49,28 +51,22 @@ class Problem12 {
       |07198403850962455444362981230987879927244284909188
       |84580156166097919133875499200524063689912560717606
       |05886116467109405077541002256983155200055935729725
-      |71636269561882670428252483600823257530420752963450""".stripMargin.replaceAllLiterally("\n", "")
+      |71636269561882670428252483600823257530420752963450"""
+      .stripMargin.replaceAllLiterally("\n", "")
 
   @Test
   def solve() {
-    var largest: Int = 0
-    var digits: String = ""
-    var skipped = 0
+    // create a collection of a tuple of 5 digits and their respective products,
+    // sort the collection by product (descending order),
+    // and return the tuple containing largest
+    val (largestProduct, digits) = (dataGrid.sliding(5, 1) map { chunk =>
+      val product = (chunk map (_ - '0')).product
+      (product, chunk)
+    }).toSeq.sortBy(-_._1).head
 
-    // process the string as sequences of 5 characters
-    dataGrid.sliding(5, 1) foreach { chunk =>
-      // if the chunk contains a zero, skip it
-      if (chunk.contains('0')) skipped += 1
-      else {
-        val product = (chunk map (_ - '0')).foldLeft[Int](1)((product, n) => n * product)
-        if (product > largest) {
-          largest = product
-          digits = chunk
-        }
-      }
-    }
+    logger.info( s"""The largest product is $largestProduct from "${digits.mkString}" at position ${dataGrid.indexOf(digits)}""")
 
-    logger.info( s"""The largest product is $largest from "${digits.mkString} ($skipped skipped)"""")
+    Assert.assertTrue(largestProduct == 40824)
   }
 
 }

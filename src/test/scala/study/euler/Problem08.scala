@@ -56,15 +56,15 @@ class Problem08() {
 
   @Test
   def solve() {
-    // create a collection of tuples of 5 digits and their sum,
+    // create a collection of a tuple of 5 digits and their respective sums,
     // sort the collection by sum (descending order),
-    // and return the largest
-    val (largestSum, theDigits) = (dataGrid.sliding(5, 1) map { chunk =>
+    // and return the tuple containing largest product
+    val (largestSum, digits) = (dataGrid.sliding(5, 1) map { chunk =>
       val sum = (chunk map (_ - '0')).sum
       (sum, chunk)
     }).toSeq.sortBy(-_._1).head
 
-    logger.info( s"""The largest sum is $largestSum from "$theDigits" at position ${dataGrid.indexOf(theDigits)}""")
+    logger.info( s"""The largest sum is $largestSum from "$digits" at position ${dataGrid.indexOf(digits)}""")
 
     Assert.assertTrue(largestSum == 42)
   }
