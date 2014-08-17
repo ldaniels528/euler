@@ -13,7 +13,6 @@ class Problem02() {
   @Test
   def solve() {
     val solution = fibonacci(max  = 4000000)
-
     logger.info(s"solution = $solution")
 
     Assert.assertTrue(solution == 1089154)
