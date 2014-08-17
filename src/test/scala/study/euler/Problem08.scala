@@ -1,10 +1,10 @@
 package study.euler
 
-import org.junit.Test
+import org.junit.{Assert, Test}
 import org.slf4j.LoggerFactory
 
 /**
- * Find the greatest product of five consecutive digits in the 1000-digit number.
+ * Find the greatest sum of five consecutive digits in the 1000-digit number.
  *
  * 73167176531330624919225119674426574742355349194934
  * 96983520312774506326239578318016984801869478851843
@@ -26,13 +26,12 @@ import org.slf4j.LoggerFactory
  * 84580156166097919133875499200524063689912560717606
  * 05886116467109405077541002256983155200055935729725
  * 71636269561882670428252483600823257530420752963450
- * 
+ *
  * Answer: The largest sum is 42 at position 364
  */
 class Problem08() {
-  val logger = LoggerFactory.getLogger(getClass)
-
-  val data =
+  private val logger = LoggerFactory.getLogger(getClass)
+  private val dataGrid =
     "73167176531330624919225119674426574742355349194934" +
       "96983520312774506326239578318016984801869478851843" +
       "85861560789112949495459501737958331952853208805511" +
@@ -56,22 +55,17 @@ class Problem08() {
 
   @Test
   def solve() {
-    var p = 0
-    var largestSum = 0
-    var largestSumPos = 0
-    
-    val limit = data.length() - 5
-    while (p < limit) {
-      val sect = data.substring(p, p + 5)
-      val sum = (sect map (c => c - '0')).sum
-      if(sum > largestSum) {
-        largestSum = sum
-        largestSumPos = p
-        logger.info(s"'$sect' = $sum (pos $p)")
-      }
-      p += 1
-    }
-    logger.info(s"The largest sum is $largestSum at position $largestSumPos")
+    // create a collection of tuples of 5 digits and their sum,
+    // sort the collection by sum (descending order),
+    // and return the largest
+    val (largestSum, theDigits) = (dataGrid.sliding(5, 1) map { chunk =>
+      val sum = (chunk map (_ - '0')).sum
+      (sum, chunk)
+    }).toSeq.sortBy(-_._1).head
+
+    logger.info( s"""The largest sum is $largestSum from "$theDigits" at position ${dataGrid.indexOf(theDigits)}""")
+
+    Assert.assertTrue(largestSum == 42)
   }
 
 }
