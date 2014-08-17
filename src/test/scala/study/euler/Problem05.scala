@@ -5,20 +5,22 @@ import org.junit.Assert
 /**
  * 2520 is the smallest number that can be divided by each of
  * the numbers from 1 to 10 without any remainder.
- *
+ * <p/>
  * What is the smallest number that is evenly divisible
  * by all of the numbers from 1 to 20?
- *
+ * <p/>
  * Answer: 232792560
  */
 class Problem05() {
+
   import org.junit.Test
+
   val logger = org.apache.log4j.Logger.getLogger(getClass)
 
   @Test
   def solve() {
     var m = 20
-    while (!evenlyDivisible(m)) {
+    while (!isEvenlyDivisible(m, 2, 20)) {
       m += 20
     }
 
@@ -30,9 +32,16 @@ class Problem05() {
     Assert.assertTrue(m == 232792560)
   }
 
-  private def evenlyDivisible(m: Int): Boolean = {
-    Seq(11, 13, 14, 15, 16, 17, 18, 19, 20) foreach { n =>
-      if (m % n != 0) return false
+  /**
+   * Determines if the given number is evenly divisible by the given range or numbers
+   * @param number the given number
+   * @param start the lower bound of the given range of numbers
+   * @param end the upper bound of the given range of numbers
+   * @return true, if the number is evenly divisible by the given range or numbers
+   */
+  private def isEvenlyDivisible(number: Int, start: Int, end: Int): Boolean = {
+    for(n <- start to end) {
+      if (number % n != 0) return false
     }
     true
   }
