@@ -27,6 +27,11 @@ class Problem03() {
     Assert.assertTrue(result == Some(6857))
   }
 
+  /**
+   * Finds the largest prime number for the given input number
+   * @param number the given input number
+   * @return an option of a prime number
+   */
   private def largestPrime(number: Long): Option[Long] = {
     var largestPrime: Option[Long] = None
     var m = 2L
@@ -39,6 +44,11 @@ class Problem03() {
     largestPrime
   }
 
+  /**
+   * Determines whether the given number is a prime number
+   * @param number the given number
+   * @return true, if the number is a prime number (e.g. 2, 3, 5, 7, ...)
+   */
   private def isPrime(number: Long): Boolean = {
     var m = 2L
     while (m <= number / m) {
