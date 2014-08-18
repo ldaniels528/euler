@@ -14,7 +14,7 @@ class Problem01() {
 
   @Test
   def solve() {
-    val solution = (1 to 999).foldLeft[Int](0) { (total, n) =>
+    val solution = (3 to 999).reduce { (total, n) =>
         total + (if (n % 3 == 0 || n % 5 == 0) n else 0)
     }
 

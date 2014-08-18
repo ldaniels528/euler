@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory
 /**
  * Problem #3: The prime factors of 13195 are 5, 7, 13 and 29.
  * What is the largest prime factor of the number 600851475143 ?
- * 
+ *
  * Answer: The largest prime is 6857
  */
 class Problem03() {
@@ -15,16 +15,16 @@ class Problem03() {
   @Test
   def solve() {
     val largePrime = 600851475143L
-
-    val result = largestPrime(largePrime)
-    result match {
+    val result = largestPrime(largePrime) match {
       case Some(factor) =>
-        logger.info(s"The largest prime factor of $largePrime is ${factor}")
+        logger.info(s"The largest prime factor of $largePrime is $factor")
+        factor
       case None =>
         logger.info(s"No factor could be found; $largePrime is a prime.")
+        -1
     }
-    
-    Assert.assertTrue(result == Some(6857))
+
+    Assert.assertTrue(result == 6857)
   }
 
   /**

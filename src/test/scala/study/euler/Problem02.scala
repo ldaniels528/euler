@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory
 /**
  * Problem #2: Find the sum of all the even-valued terms in the Fibonacci
  * sequence which do not exceed four million.
+ *
+ * Answer: 1089154
  */
 class Problem02() {
   val logger = LoggerFactory.getLogger(getClass)
